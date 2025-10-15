@@ -1,4 +1,6 @@
 import { Client } from "pg";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS usernames (
