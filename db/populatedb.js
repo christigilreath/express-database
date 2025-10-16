@@ -19,6 +19,7 @@ const main = async () => {
   console.log("seeding...");
   const client = new Client({
     connectionString: process.argv[2],
+    ssl: true,
   });
   await client.connect();
   await client.query(SQL);

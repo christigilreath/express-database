@@ -8,7 +8,10 @@ const __dirname = path.dirname(__filename);
 
 
 const getUsernames = async (req, res) => {
-  const usernames = await db.getAllUsernames();
+  let usernames;
+  req.query.search ? usernames = await db.searchUsernames(req.query.search) : usernames = await db.getAllUsernames()
+  // console.log(req.query.search)
+  // const usernames = await db.getAllUsernames();
   console.log("Usernames: ", usernames);
   res.send("Usernames: " + usernames.map((user) => user.username).join(", "));
 };
@@ -24,4 +27,12 @@ const createUsernamePost = async (req, res)=>{
     res.redirect("/")
 }
 
-export {getUsernames, createUsernameGet, createUsernamePost}
+const deleteAllUsernames = async (req, res)=>{
+  
+  await db.deleteUsernames()
+  res.redirect("/")
+}
+
+
+
+export {getUsernames, createUsernameGet, createUsernamePost, deleteAllUsernames}
